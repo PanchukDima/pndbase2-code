@@ -25,10 +25,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    Core/qpndcore.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    Core/qpndcore.h
 
 FORMS += \
         mainwindow.ui
