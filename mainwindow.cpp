@@ -7,8 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QPndCore core;
-
-
+    core.dynamic_view_add();
 }
 
 MainWindow::~MainWindow()

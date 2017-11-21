@@ -26,11 +26,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    Core/qpndcore.cpp
+    Core/qpndcore.cpp \
+    Core/objects_app.cpp \
+    Core/DialogSorWindow/w_dynamic_view.cpp
 
 HEADERS += \
         mainwindow.h \
-    Core/qpndcore.h
+    Core/qpndcore.h \
+    Core/objects_app.h \
+    Core/DialogSorWindow/w_dynamic_view.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    Core/DialogSorWindow/w_dynamic_view.ui
