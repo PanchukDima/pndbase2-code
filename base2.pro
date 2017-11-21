@@ -28,13 +28,15 @@ SOURCES += \
         mainwindow.cpp \
     Core/qpndcore.cpp \
     Core/objects_app.cpp \
-    Core/DialogSorWindow/w_dynamic_view.cpp
+    Core/DialogSorWindow/w_dynamic_view.cpp \
+    Core/logs_engine.cpp
 
 HEADERS += \
         mainwindow.h \
     Core/qpndcore.h \
     Core/objects_app.h \
-    Core/DialogSorWindow/w_dynamic_view.h
+    Core/DialogSorWindow/w_dynamic_view.h \
+    Core/logs_engine.h
 
 FORMS += \
         mainwindow.ui \

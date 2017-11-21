@@ -95,3 +95,6 @@ Core
 		bool info_patient_del(QString medcard_id);
 		void info_patient_view_only(QString medcard_id);
 		
+#Logs_engine
+		bool log_add(int type, QString id);
+		
