@@ -28,16 +28,19 @@ SOURCES += \
         mainwindow.cpp \
     Core/qpndcore.cpp \
     Core/objects_app.cpp \
-    Core/DialogSorWindow/w_dynamic_view.cpp \
-    Core/logs_engine.cpp
+    Core/DialogSorWindow/Dynamic_view/w_dynamic_view.cpp \
+    Core/logs_engine.cpp \
+    Core/DialogSorWindow/Auth/d_auth.cpp
 
 HEADERS += \
         mainwindow.h \
     Core/qpndcore.h \
     Core/objects_app.h \
-    Core/DialogSorWindow/w_dynamic_view.h \
-    Core/logs_engine.h
+    Core/DialogSorWindow/Dynamic_view/w_dynamic_view.h \
+    Core/logs_engine.h \
+    Core/DialogSorWindow/Auth/d_auth.h
 
 FORMS += \
         mainwindow.ui \
-    Core/DialogSorWindow/w_dynamic_view.ui
+    Core/DialogSorWindow/Dynamic_view/w_dynamic_view.ui \
+    Core/DialogSorWindow/Auth/d_auth.ui
