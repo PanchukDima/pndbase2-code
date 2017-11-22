@@ -97,4 +97,10 @@ Core
 		
 #Logs_engine
 		bool log_add(int type, QString id);
+#auth_module
+		bool check_cert(QString username);
+    		bool server_settings();
+    		QString get_username_os();
+    		bool load_certs(QString username);
+    		void sign_in();
 		
