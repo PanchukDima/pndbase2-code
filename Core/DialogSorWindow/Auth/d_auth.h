@@ -2,6 +2,9 @@
 #define D_AUTH_H
 
 #include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <Core/qpndcore.h>
 
 namespace Ui {
 class D_auth;
@@ -17,6 +20,11 @@ public:
 
 private:
     Ui::D_auth *ui;
+public slots:
+    bool server_settings();
+    QString get_username_os();
+    void sign_in();
+
 };
 
 #endif // D_AUTH_H
