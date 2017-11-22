@@ -352,3 +352,24 @@ void QPndCore::info_patient_view_only(QString medcard_id)
 {
 
 }
+bool QPndCore::user_settings()
+{
+
+}
+bool QPndCore::user_rights()
+{
+
+}
+bool QPndCore::user_support_area()
+{
+
+}
+//certs
+bool QPndCore::check_cert(QString username)
+{
+
+}
+bool QPndCore::load_certs(QString username)
+{
+
+}

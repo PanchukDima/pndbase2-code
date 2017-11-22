@@ -8,7 +8,10 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QMainWindow>
-#include <Core/DialogSorWindow/w_dynamic_view.h>
+#include <Core/DialogSorWindow/Dynamic_view/w_dynamic_view.h>
+#include <Core/objects_app.h>
+#include <QFile>
+#include <QProcess>
 
 class QPndCore : public QObject
 {
@@ -115,6 +118,13 @@ public slots:
         void info_patient_edit(QString medcard_id);
         bool info_patient_del(QString medcard_id);
         void info_patient_view_only(QString medcard_id);
+//users
+        bool user_settings();
+        bool user_rights();
+        bool user_support_area();
+//certs
+        bool check_cert(QString username);
+        bool load_certs(QString username);
 };
 
 #endif // QPNDCORE_H
