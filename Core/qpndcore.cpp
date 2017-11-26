@@ -7,6 +7,13 @@ QPndCore::QPndCore(QObject *parent) : QObject(parent)
 
 void QPndCore::init_core()
 {
+    Objects_app::local_path obj;
+    Objects_app::server_bd obj_bd_server;
+    Objects_app::server_cert obj_cert_serser;
+
+    QSettings * settings = new QSettings(obj.path_settings,QSettings::IniFormat);
+    obj_cert_serser.ip_address = settings->value("cert_server/ip").toString(); // перенести в отделный init и получать настройки из базы данных
+    obj_cert_serser.password = settings->value("cert_server/password").toString(); //
 
 }
 QString QPndCore::diagnos_first(QString medcard_id)
@@ -85,8 +92,7 @@ QString QPndCore::analizes_last(QString medcard_id)
 }
 void QPndCore::analizes_add()
 {
-    Objects_app::local_path obj;
-    qDebug()<<obj.putty_path;
+
 }
 void QPndCore::analyzes_edit(QString medcard_id)
 {

@@ -8,10 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     QPndCore core;
     Objects_app::local_path obj;
-    obj.putty_path = "testtsad";
-    core.analizes_add();
-
-
+    obj.path_settings = QApplication::applicationDirPath();
+    core.init_core();
 }
 
 MainWindow::~MainWindow()
