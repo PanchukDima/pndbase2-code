@@ -31,7 +31,8 @@ SOURCES += \
     Core/DialogSorWindow/Dynamic_view/w_dynamic_view.cpp \
     Core/logs_engine.cpp \
     Core/DialogSorWindow/Auth/d_auth.cpp \
-    Core/messages_app.cpp
+    Core/messages_app.cpp \
+    Core/DialogSorWindow/Settings_app/d_settings_app.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,9 +41,11 @@ HEADERS += \
     Core/DialogSorWindow/Dynamic_view/w_dynamic_view.h \
     Core/logs_engine.h \
     Core/DialogSorWindow/Auth/d_auth.h \
-    Core/messages_app.h
+    Core/messages_app.h \
+    Core/DialogSorWindow/Settings_app/d_settings_app.h
 
 FORMS += \
         mainwindow.ui \
     Core/DialogSorWindow/Dynamic_view/w_dynamic_view.ui \
-    Core/DialogSorWindow/Auth/d_auth.ui
+    Core/DialogSorWindow/Auth/d_auth.ui \
+    Core/DialogSorWindow/Settings_app/d_settings_app.ui

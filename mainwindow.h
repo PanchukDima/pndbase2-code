@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <Core/qpndcore.h>
+#include <Core/DialogSorWindow/Auth/d_auth.h>
 #include <QDebug>
 #include <QMessageBox>
 

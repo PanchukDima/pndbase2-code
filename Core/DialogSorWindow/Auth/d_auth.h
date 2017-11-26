@@ -22,7 +22,7 @@ private:
     Ui::D_auth *ui;
 public slots:
     bool server_settings();
-    QString get_username_os();
+    void get_username_os();
     void sign_in();
 
 };

@@ -20,12 +20,14 @@ public:
         static QString password;
         static QString path_serv;
         static QString ip_address;
-
     };
-    struct server_bd
+    struct server_bd_starter
     {
         static QString username;
         static QString password;
+        static QString ip_address;
+        static int port;
+        static QString database;
     };
     struct app
     {

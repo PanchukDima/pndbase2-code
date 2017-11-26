@@ -8,13 +8,21 @@ QPndCore::QPndCore(QObject *parent) : QObject(parent)
 void QPndCore::init_core()
 {
     Objects_app::local_path obj;
-    Objects_app::server_bd obj_bd_server;
-    Objects_app::server_cert obj_cert_serser;
-
+    Objects_app::server_bd_starter obj_bd_server;
     QSettings * settings = new QSettings(obj.path_settings,QSettings::IniFormat);
-    obj_cert_serser.ip_address = settings->value("cert_server/ip").toString(); // перенести в отделный init и получать настройки из базы данных
-    obj_cert_serser.password = settings->value("cert_server/password").toString(); //
+    obj_bd_server.ip_address = settings->value("db/ip").toString();
+    obj_bd_server.port = settings->value("db/port").toInt();
+    obj_bd_server.username = settings->value("db/username").toString();
+    obj_bd_server.password = settings->value("db/password").toString();
+    obj_bd_server.database = settings->value("db/database").toString();
+}
+void QPndCore::settings_app()
+{
+    D_settings_app dialog;
+    if(dialog.exec())
+    {
 
+    }
 }
 QString QPndCore::diagnos_first(QString medcard_id)
 {

@@ -20,6 +20,7 @@
 #include <QApplication>
 #include <Core/objects_app.h>
 #include <QSettings>
+#include <Core/DialogSorWindow/Settings_app/d_settings_app.h>
 
 class QPndCore : public QObject
 {
@@ -33,6 +34,8 @@ signals:
 public slots:
 //init
         void init_core();
+//settings app
+        void settings_app();
 //diagnos
         QString diagnos_first(QString medcard_id);
         QString diagnos_last(QString medcard_id);
