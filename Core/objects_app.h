@@ -29,6 +29,14 @@ public:
         static int port;
         static QString database;
     };
+    struct server_bd_patients
+    {
+        static QString username;
+        static QString password;
+        static QString ip_address;
+        static int port;
+        static QString database;
+    };
     struct app
     {
         static QString staff;

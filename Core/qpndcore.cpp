@@ -15,6 +15,7 @@ void QPndCore::init_core()
     obj_bd_server.username = settings->value("db/username").toString();
     obj_bd_server.password = settings->value("db/password").toString();
     obj_bd_server.database = settings->value("db/database").toString();
+    get_username_os();
 }
 void QPndCore::settings_app()
 {
@@ -23,6 +24,16 @@ void QPndCore::settings_app()
     {
 
     }
+}
+void QPndCore::get_username_os()
+{
+    Objects_app::os obj;
+    QString name = qgetenv("USER");
+            if (name.isEmpty())
+            {
+                name = qgetenv("USERNAME");
+            }
+            obj.username = name;
 }
 QString QPndCore::diagnos_first(QString medcard_id)
 {
@@ -384,8 +395,9 @@ bool QPndCore::user_support_area()
 
 }
 //certs
-bool QPndCore::check_cert(QString username)
+bool QPndCore::check_cert()
 {
+    Objects_app::os obj;
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     messages_app mess;
@@ -406,7 +418,7 @@ bool QPndCore::check_cert(QString username)
                 }
                 else if(user_certs_number().toInt() < query.value(0).toInt())
                 {
-                    if(load_certs(username))
+                    if(load_certs())
                     {
                         return true;
                     }
@@ -425,15 +437,17 @@ bool QPndCore::check_cert(QString username)
         return false;
     }
 }
-bool QPndCore::load_certs(QString username)
+bool QPndCore::load_certs()
 {
+    Objects_app::os obj;
+    Objects_app::server_cert obj_cert_serv;
+    Objects_app::local_path obj_local;
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     messages_app mess;
     QString namefile;
     QProcess proc;
-    Objects_app::server_cert obj_cert_serv;
-    Objects_app::local_path obj_local;
+
 
     if(db.open())
     {

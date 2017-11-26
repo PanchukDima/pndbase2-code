@@ -136,9 +136,11 @@ public slots:
         bool user_rights();
         bool user_support_area();
 //certs
-        bool check_cert(QString username);
-        bool load_certs(QString username);
+        bool check_cert();
+        bool load_certs();
         QString user_certs_number();
+//os
+        void get_username_os();
 
 };
 
