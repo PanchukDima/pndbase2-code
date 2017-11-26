@@ -12,11 +12,17 @@ D_auth::~D_auth()
 {
     delete ui;
 }
-bool D_auth::check_cert(QString username);
-bool D_auth::server_settings();
-QString D_auth::get_username_os();
-bool D_auth::load_certs(QString username);
-void D_auth::sign_in();
-bool D_auth::user_settings();
-bool D_auth::user_rights();
-bool D_auth::user_support_area();
+
+bool D_auth::server_settings()
+{
+
+}
+QString D_auth::get_username_os()
+{
+
+}
+void D_auth::sign_in()
+{
+
+}
+

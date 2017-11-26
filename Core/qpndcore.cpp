@@ -5,6 +5,10 @@ QPndCore::QPndCore(QObject *parent) : QObject(parent)
 
 }
 
+void QPndCore::init_core()
+{
+
+}
 QString QPndCore::diagnos_first(QString medcard_id)
 {
 
@@ -81,7 +85,8 @@ QString QPndCore::analizes_last(QString medcard_id)
 }
 void QPndCore::analizes_add()
 {
-
+    Objects_app::local_path obj;
+    qDebug()<<obj.putty_path;
 }
 void QPndCore::analyzes_edit(QString medcard_id)
 {
@@ -367,9 +372,97 @@ bool QPndCore::user_support_area()
 //certs
 bool QPndCore::check_cert(QString username)
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    messages_app mess;
+    if(db.open())
+    {
+        query.exec();
+        if(query.lastError().isValid())
+        {
+            qDebug()<<query.lastError();
+            return false;
+        }
+        else
+        {
+            while (query.next()) {
+                if(user_certs_number().toInt() == query.value(0).toInt())
+                {
+                    return true;
+                }
+                else if(user_certs_number().toInt() < query.value(0).toInt())
+                {
+                    if(load_certs(username))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
 
+    }
+    else
+    {
+        mess.db_connect_false();
+        return false;
+    }
 }
 bool QPndCore::load_certs(QString username)
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    messages_app mess;
+    QString namefile;
+    QProcess proc;
+    Objects_app::server_cert obj_cert_serv;
+    Objects_app::local_path obj_local;
 
+    if(db.open())
+    {
+        query.exec();
+        if(query.lastError().isValid())
+        {
+            qDebug()<<query.lastError();
+            return false;
+        }
+        else
+        {
+            while (query.next())
+            {
+                namefile = query.value(2).toString();
+                proc.start(obj_local.putty_path+"/pscp.exe -pw RVgw79IbQg root@46.173.218.35:/home/panch-dima/CAServer/user_certs/131117180833974441449.crt C:/Users/user/AppData/Roaming/postgresql/user2.crt");
+            }
+
+        }
+    }
+    else
+    {
+        mess.db_connect_false();
+        return false;
+    }
+}
+QString QPndCore::user_certs_number()
+{
+    QString app_location = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir dir(app_location);
+    dir.cd("..");
+    dir.cd("postgresql");
+    QFile file(dir.absolutePath()+"\\id_certs");
+    if(file.exists())
+    {
+        if(file.open(QIODevice::ReadOnly))
+        {
+            QTextStream instream(&file);
+            QString line = instream.readLine();
+            return line;
+        }
+    }
+    else
+    {
+
+    }
 }

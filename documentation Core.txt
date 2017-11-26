@@ -99,8 +99,19 @@ Core
 		bool log_add(int type, QString id);
 #auth_module
 		bool check_cert(QString username);
+			¬озвращает true или false
     		bool server_settings();
+			задает параметры из сохраненного файла конфигурации
     		QString get_username_os();
+			¬озвращает username операционной системы
     		bool load_certs(QString username);
+			¬озвращает true если сертификат был загружен или false если не был загружен
     		void sign_in();
+			¬ыполн€ет авторизацию на сервере базы данных
+		bool user_settings();
+			¬озвращает true если настройки пользовател€ были получены успешно или false если не были загружены
+    		bool user_rights();
+			¬озвращает true если права пользовател€ были получены успешно или false если не были загружены
+    		bool user_support_area();
+			¬озвращает true если обслуживаемые участки пользовател€ были получены успешно или false если не были загружены
 		

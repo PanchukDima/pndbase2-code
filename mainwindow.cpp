@@ -7,7 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QPndCore core;
-    core.dynamic_view_add();
+    Objects_app::local_path obj;
+    obj.putty_path = "testtsad";
+    core.analizes_add();
+
 
 }
 

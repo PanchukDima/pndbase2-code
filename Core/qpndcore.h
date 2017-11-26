@@ -12,6 +12,14 @@
 #include <Core/objects_app.h>
 #include <QFile>
 #include <QProcess>
+#include <QStandardPaths>
+#include <QDebug>
+#include <QDir>
+#include <Core/messages_app.h>
+#include <QMessageBox>
+#include <QApplication>
+#include <Core/objects_app.h>
+#include <QSettings>
 
 class QPndCore : public QObject
 {
@@ -23,6 +31,8 @@ public:
 signals:
 
 public slots:
+//init
+        void init_core();
 //diagnos
         QString diagnos_first(QString medcard_id);
         QString diagnos_last(QString medcard_id);
@@ -125,6 +135,8 @@ public slots:
 //certs
         bool check_cert(QString username);
         bool load_certs(QString username);
+        QString user_certs_number();
+
 };
 
 #endif // QPNDCORE_H
