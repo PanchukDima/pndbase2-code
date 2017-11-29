@@ -8,8 +8,9 @@ D_auth::D_auth(QWidget *parent) :
     ui->setupUi(this);
     QPndCore core;
     get_username_os();
-    core.check_cert();
     connect(ui->pushButton_settings,SIGNAL(clicked()),SLOT(server_settings()));
+    connect(ui->pushButton_sign,SIGNAL(clicked(bool)),SLOT(sign_in()));
+    connect(ui->pushButton_cancel,SIGNAL(clicked(bool)),SLOT(close()));
 }
 
 D_auth::~D_auth()
@@ -31,13 +32,13 @@ void D_auth::get_username_os()
 void D_auth::sign_in()
 {
     messages_app mess;
-    Objects_app::server_bd_patients obj;
-    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    db.setHostName(obj.ip_address);
-    db.setPort(obj.port);
-    db.setUserName(obj.username);
-    db.setPassword(ui->lineEdit_password->text());
-    db.setDatabaseName(obj.database);
+    QPndCore core;
+    Objects_app::server_bd obj;
+    obj.username = ui->lineEdit_login->text();
+    obj.password = ui->lineEdit_password->text();
+    core.check_cert();
+    QSqlDatabase db = QSqlDatabase::database("main");
+    db.setDatabaseName(obj.database_patients);
     if(db.open())
     {
         this->accept();

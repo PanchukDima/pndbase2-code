@@ -8,15 +8,16 @@ QPndCore::QPndCore(QObject *parent) : QObject(parent)
 void QPndCore::init_core()
 {
     Objects_app::local_path obj;
-    Objects_app::server_bd_starter obj_bd_server;
+    Objects_app::server_bd obj_bd_server;
     QSettings * settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     obj_bd_server.ip_address = settings->value("db/ip").toString();
     obj_bd_server.port = settings->value("db/port").toInt();
     obj_bd_server.username = settings->value("db/username").toString();
     obj_bd_server.password = settings->value("db/password").toString();
-    obj_bd_server.database = settings->value("db/database").toString();
+    obj_bd_server.database_patients = settings->value("db/database_main").toString();
+    obj_bd_server.database_auth = settings->value("db/database_auth").toString();
     get_username_os();
-    connect_database_starter();
+    connect_database_main();
 }
 void QPndCore::settings_app()
 {
@@ -397,9 +398,10 @@ bool QPndCore::user_support_area()
 }
 //certs
 bool QPndCore::check_cert()
-{
-    Objects_app::os obj;
+{    
+    Objects_app::server_bd obj_server_bd;
     QSqlDatabase db = QSqlDatabase::database();
+    db.setDatabaseName(obj_server_bd.database_auth);
     QSqlQuery query;
     messages_app mess;
     if(db.open())
@@ -442,8 +444,10 @@ bool QPndCore::load_certs()
 {
     Objects_app::os obj;
     Objects_app::server_cert obj_cert_serv;
+    Objects_app::server_bd obj_server_bd;
     Objects_app::local_path obj_local;
     QSqlDatabase db = QSqlDatabase::database();
+    db.setDatabaseName(obj_server_bd.database_auth);
     QSqlQuery query;
     messages_app mess;
     QString namefile;
@@ -495,25 +499,14 @@ QString QPndCore::user_certs_number()
 
     }
 }
-bool QPndCore::connect_database_starter()
+bool QPndCore::connect_database_main()
 {
-    Objects_app::server_bd_starter obj;
-    QSqlDatabase db_starter = QSqlDatabase::addDatabase("QPSQL","starter");
-    db_starter.setHostName(obj.ip_address);
-    db_starter.setPort(obj.port);
-    db_starter.setDatabaseName(obj.database);
-    db_starter.setUserName(obj.username);
-    db_starter.setPassword(obj.password);
-    if(db_starter.open())
-    {
-        return true;
-    }
-    else
-    {
-        if(db_starter.lastError().isValid())
-        {
-            qDebug()<<db_starter.lastError();
-            return false;
-        }
-    }
+    Objects_app::server_bd obj;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL","main");
+    db.setHostName(obj.ip_address);
+    db.setPort(obj.port);
+    db.setDatabaseName(obj.database_patients);
+    db.setUserName(obj.username);
+    db.setPassword(obj.password);
+    return true;
 }

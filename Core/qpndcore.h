@@ -142,7 +142,7 @@ public slots:
 //os
         void get_username_os();
 //DataBase
-        bool connect_database_starter();
+        bool connect_database_main();
 
 
 };

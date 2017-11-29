@@ -21,8 +21,9 @@ void D_settings_app::load_settings()
     QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     ui->lineEdit_host->setText(settings->value("db/ip").toString());
     ui->lineEdit_port->setText(settings->value("db/port").toString());
-    ui->lineEdit_database->setText(settings->value("db/database").toString());
-    ui->lineEdit_username->setText(settings->value("db/username").toString());
+    ui->lineEdit_database_main->setText(settings->value("db/database_main").toString());
+    ui->lineEdit_db_auth->setText(settings->value("db/database_auth").toString());
+
 }
 void D_settings_app::save_settings()
 {
@@ -30,7 +31,6 @@ void D_settings_app::save_settings()
     QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     settings->setValue("db/ip",ui->lineEdit_host->text());
     settings->setValue("db/port",ui->lineEdit_port->text());
-    settings->setValue("db/username",ui->lineEdit_username->text());
-    settings->setValue("db/password",ui->lineEdit_password->text());
-    settings->setValue("db/database",ui->lineEdit_database->text());
+    settings->setValue("db/database_main",ui->lineEdit_database_main->text());
+    settings->setValue("db/database_auth",ui->lineEdit_db_auth->text());
 }

@@ -21,22 +21,16 @@ public:
         static QString path_serv;
         static QString ip_address;
     };
-    struct server_bd_starter
+    struct server_bd
     {
         static QString username;
         static QString password;
         static QString ip_address;
         static int port;
-        static QString database;
+        static QString database_patients;
+        static QString database_auth;
     };
-    struct server_bd_patients
-    {
-        static QString username;
-        static QString password;
-        static QString ip_address;
-        static int port;
-        static QString database;
-    };
+
     struct app
     {
         static QString staff;
