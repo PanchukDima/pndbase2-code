@@ -141,6 +141,9 @@ public slots:
         QString user_certs_number();
 //os
         void get_username_os();
+//DataBase
+        bool connect_database_starter();
+
 
 };
 

@@ -16,6 +16,7 @@ void QPndCore::init_core()
     obj_bd_server.password = settings->value("db/password").toString();
     obj_bd_server.database = settings->value("db/database").toString();
     get_username_os();
+    connect_database_starter();
 }
 void QPndCore::settings_app()
 {
@@ -492,5 +493,27 @@ QString QPndCore::user_certs_number()
     else
     {
 
+    }
+}
+bool QPndCore::connect_database_starter()
+{
+    Objects_app::server_bd_starter obj;
+    QSqlDatabase db_starter = QSqlDatabase::addDatabase("QPSQL","starter");
+    db_starter.setHostName(obj.ip_address);
+    db_starter.setPort(obj.port);
+    db_starter.setDatabaseName(obj.database);
+    db_starter.setUserName(obj.username);
+    db_starter.setPassword(obj.password);
+    if(db_starter.open())
+    {
+        return true;
+    }
+    else
+    {
+        if(db_starter.lastError().isValid())
+        {
+            qDebug()<<db_starter.lastError();
+            return false;
+        }
     }
 }
