@@ -6,6 +6,7 @@
 #include <Core/DialogSorWindow/Auth/d_auth.h>
 #include <QDebug>
 #include <QMessageBox>
+#include <QCloseEvent>
 
 namespace Ui {
 class MainWindow;
@@ -21,6 +22,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+public slots:
+    void load_setting_find();
+    void find_patients();
+    void settings_tables();
+    void load_table_patients();
 };
 
 #endif // MAINWINDOW_H

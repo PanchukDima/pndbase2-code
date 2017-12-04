@@ -7,17 +7,16 @@ QPndCore::QPndCore(QObject *parent) : QObject(parent)
 
 void QPndCore::init_core()
 {
-    Objects_app::local_path obj;
-    Objects_app::server_bd obj_bd_server;
-    QSettings * settings = new QSettings(obj.path_settings,QSettings::IniFormat);
-    obj_bd_server.ip_address = settings->value("db/ip").toString();
-    obj_bd_server.port = settings->value("db/port").toInt();
-    obj_bd_server.username = settings->value("db/username").toString();
-    obj_bd_server.password = settings->value("db/password").toString();
-    obj_bd_server.database_patients = settings->value("db/database_main").toString();
-    obj_bd_server.database_auth = settings->value("db/database_auth").toString();
+    Objects_app obj;
+    QSettings * settings = new QSettings(obj.local_path_settings,QSettings::IniFormat);
+    obj.server_bd_ip_address = settings->value("db/ip").toString();
+    obj.server_bd_port = settings->value("db/port").toInt();
+    obj.server_bd_username = settings->value("db/username").toString();
+    obj.server_bd_password = settings->value("db/password").toString();
+    obj.server_bd_database_patients = settings->value("db/database_main").toString();
+    obj.server_bd_database_auth = settings->value("db/database_auth").toString();
     get_username_os();
-    connect_database_main();
+    //connect_database_main();
 }
 void QPndCore::settings_app()
 {
@@ -29,13 +28,16 @@ void QPndCore::settings_app()
 }
 void QPndCore::get_username_os()
 {
-    Objects_app::os obj;
+
+    Objects_app obj;
     QString name = qgetenv("USER");
             if (name.isEmpty())
             {
                 name = qgetenv("USERNAME");
             }
-            obj.username = name;
+            obj.os_username = name;
+
+
 }
 QString QPndCore::diagnos_first(QString medcard_id)
 {
@@ -399,9 +401,9 @@ bool QPndCore::user_support_area()
 //certs
 bool QPndCore::check_cert()
 {    
-    Objects_app::server_bd obj_server_bd;
+    Objects_app obj;
     QSqlDatabase db = QSqlDatabase::database();
-    db.setDatabaseName(obj_server_bd.database_auth);
+    db.setDatabaseName(obj.server_bd_database_auth);
     QSqlQuery query;
     messages_app mess;
     if(db.open())
@@ -442,12 +444,9 @@ bool QPndCore::check_cert()
 }
 bool QPndCore::load_certs()
 {
-    Objects_app::os obj;
-    Objects_app::server_cert obj_cert_serv;
-    Objects_app::server_bd obj_server_bd;
-    Objects_app::local_path obj_local;
+    Objects_app obj;
     QSqlDatabase db = QSqlDatabase::database();
-    db.setDatabaseName(obj_server_bd.database_auth);
+    db.setDatabaseName(obj.server_bd_database_auth);
     QSqlQuery query;
     messages_app mess;
     QString namefile;
@@ -467,7 +466,7 @@ bool QPndCore::load_certs()
             while (query.next())
             {
                 namefile = query.value(2).toString();
-                proc.start(obj_local.putty_path+"/pscp.exe -pw RVgw79IbQg root@46.173.218.35:/home/panch-dima/CAServer/user_certs/131117180833974441449.crt C:/Users/user/AppData/Roaming/postgresql/user2.crt");
+                proc.start(obj.local_path_putty_path+"/pscp.exe -pw RVgw79IbQg root@46.173.218.35:/home/panch-dima/CAServer/user_certs/131117180833974441449.crt C:/Users/user/AppData/Roaming/postgresql/user2.crt");
             }
 
         }
@@ -501,12 +500,12 @@ QString QPndCore::user_certs_number()
 }
 bool QPndCore::connect_database_main()
 {
-    Objects_app::server_bd obj;
+    Objects_app obj;
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL","main");
-    db.setHostName(obj.ip_address);
-    db.setPort(obj.port);
-    db.setDatabaseName(obj.database_patients);
-    db.setUserName(obj.username);
-    db.setPassword(obj.password);
+    db.setHostName(obj.server_bd_ip_address);
+    db.setPort(obj.server_bd_port);
+    db.setDatabaseName(obj.server_bd_database_patients);
+    db.setUserName(obj.server_bd_username);
+    db.setPassword(obj.server_bd_password);
     return true;
 }
