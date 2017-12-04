@@ -6,11 +6,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    Objects_app obj;
+    obj.local_path_settings = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QPndCore core;
-    Objects_app::local_path obj;
-    D_auth auth;
-    obj.path_settings = QApplication::applicationDirPath();
     core.init_core();
+
+    D_auth auth;
+
     if(!auth.exec())
     {
         exit(0);

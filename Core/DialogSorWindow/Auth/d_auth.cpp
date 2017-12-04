@@ -25,20 +25,30 @@ bool D_auth::server_settings()
 }
 void D_auth::get_username_os()
 {
-    Objects_app::os obj;
-            ui->lineEdit_login->setText(obj.username);
+    Objects_app obj;
+
+            ui->lineEdit_login->setText(obj.os_username);
             ui->lineEdit_password->setFocus();
+            ui->lineEdit_login->setText("panch-dima");
+
 }
 void D_auth::sign_in()
 {
     messages_app mess;
     QPndCore core;
-    Objects_app::server_bd obj;
-    obj.username = ui->lineEdit_login->text();
-    obj.password = ui->lineEdit_password->text();
-    core.check_cert();
-    QSqlDatabase db = QSqlDatabase::database("main");
-    db.setDatabaseName(obj.database_patients);
+    Objects_app obj;
+
+    obj.server_bd_username = ui->lineEdit_login->text();
+    obj.server_bd_password = ui->lineEdit_password->text();
+
+
+    QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL","main");
+    db.setHostName(obj.server_bd_ip_address);
+    db.setPort(obj.server_bd_port);
+    db.setDatabaseName(obj.server_bd_database_patients);
+    db.setUserName(obj.server_bd_username);
+    db.setPassword(obj.server_bd_password);
+    //core.check_cert();
     if(db.open())
     {
         this->accept();
@@ -46,6 +56,7 @@ void D_auth::sign_in()
     else
     {
         ui->label_3->setText("Неправильный логин или пароль");
+        qDebug()<<db.lastError();
     }
 
 }

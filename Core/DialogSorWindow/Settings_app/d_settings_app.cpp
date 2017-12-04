@@ -17,8 +17,8 @@ D_settings_app::~D_settings_app()
 }
 void D_settings_app::load_settings()
 {
-    Objects_app::local_path obj;
-    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.local_path_settings,QSettings::IniFormat);
     ui->lineEdit_host->setText(settings->value("db/ip").toString());
     ui->lineEdit_port->setText(settings->value("db/port").toString());
     ui->lineEdit_database_main->setText(settings->value("db/database_main").toString());
@@ -27,10 +27,11 @@ void D_settings_app::load_settings()
 }
 void D_settings_app::save_settings()
 {
-    Objects_app::local_path obj;
-    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.local_path_settings,QSettings::IniFormat);
     settings->setValue("db/ip",ui->lineEdit_host->text());
     settings->setValue("db/port",ui->lineEdit_port->text());
     settings->setValue("db/database_main",ui->lineEdit_database_main->text());
     settings->setValue("db/database_auth",ui->lineEdit_db_auth->text());
+    D_settings_app::close();
 }

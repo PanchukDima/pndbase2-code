@@ -10,39 +10,25 @@ class Objects_app : public QObject
 public:
     explicit Objects_app(QObject *parent = 0);
 
-    struct os
-    {
-        static QString username;
-    };
-    struct server_cert
-    {
-        static QString username;
-        static QString password;
-        static QString path_serv;
-        static QString ip_address;
-    };
-    struct server_bd
-    {
-        static QString username;
-        static QString password;
-        static QString ip_address;
-        static int port;
-        static QString database_patients;
-        static QString database_auth;
-    };
 
-    struct app
-    {
-        static QString staff;
-        static QStringList service_area;
-    };
-    struct local_path
-    {
-        static QString path_settings;
-        static QString path_certs;
-        static QString app_dir;
-        static QString putty_path;
-    };
+        static QString os_username;
+        static QString server_cert_username;
+        static QString server_cert_password;
+        static QString server_cert_path_serv;
+        static QString server_cert_ip_address;
+        static QString server_bd_username;
+        static QString server_bd_password;
+        static QString server_bd_ip_address;
+        static int server_bd_port;
+        static QString server_bd_database_patients;
+        static QString server_bd_database_auth;
+        static QString app_staff;
+        static QStringList app_service_area;
+        static QString local_path_settings;
+        static QString local_path_certs;
+        static QString local_path_app_dir;
+        static QString local_path_putty_path;
+
 signals:
 
 public slots:
