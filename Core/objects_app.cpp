@@ -15,7 +15,7 @@ QString Objects_app::local_path_app_dir;
 QString Objects_app::local_path_certs;
 QString Objects_app::local_path_settings;
 QString Objects_app::local_path_putty_path;
-QString Objects_app::app_user_rights;
+QList<bool> Objects_app::app_user_rights;
 Objects_app::Objects_app(QObject *parent) : QObject(parent)
 {
 

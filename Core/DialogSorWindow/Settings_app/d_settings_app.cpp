@@ -9,6 +9,11 @@ D_settings_app::D_settings_app(QWidget *parent) :
     load_settings();
     connect(ui->pushButton_ok,SIGNAL(clicked()),SLOT(save_settings()));
     connect(ui->pushButton_cancel,SIGNAL(clicked()),SLOT(close()));
+    connect(ui->pushButton_b_arch,SIGNAL(clicked(bool)),SLOT(get_background_arch()));
+    connect(ui->pushButton_t_arch,SIGNAL(clicked(bool)),SLOT(get_text_arch()));
+    connect(ui->pushButton_b_other,SIGNAL(clicked(bool)),SLOT(get_background_other()));
+    connect(ui->pushButton_t_other,SIGNAL(clicked(bool)),SLOT(get_text_other()));
+
 }
 
 D_settings_app::~D_settings_app()
@@ -34,4 +39,36 @@ void D_settings_app::save_settings()
     settings->setValue("db/database_main",ui->lineEdit_database_main->text());
     settings->setValue("db/database_auth",ui->lineEdit_db_auth->text());
     D_settings_app::close();
+}
+void D_settings_app::get_background_arch()
+{
+    QColor color = get_color();
+    ui->pushButton_b_arch->setStyleSheet("background-color: "+color.name());
+
+}
+void D_settings_app::get_background_other()
+{
+    QColor color = get_color();
+    ui->pushButton_b_other->setStyleSheet("background-color: "+color.name());
+}
+void D_settings_app::get_text_arch()
+{
+    QColor color = get_color();
+    ui->pushButton_t_arch->setStyleSheet("background-color: "+color.name());
+}
+void D_settings_app::get_text_other()
+{
+    QColor color = get_color();
+    ui->pushButton_t_other->setStyleSheet("background-color: "+color.name());
+}
+QColor D_settings_app::get_color()
+{
+    QColor color = QColorDialog::getColor(QColor::Cmyk);
+    if (!color.isValid() ) {
+    // Cancel
+    }
+    else
+    {
+        return color;
+    }
 }
