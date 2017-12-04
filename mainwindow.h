@@ -2,11 +2,20 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <Core/qpndcore.h>
-#include <Core/DialogSorWindow/Auth/d_auth.h>
 #include <QDebug>
 #include <QMessageBox>
 #include <QCloseEvent>
+
+//Core
+#include <Core/qpndcore.h>
+
+//Dialogs othner
+#include <Core/DialogSorWindow/Auth/d_auth.h>
+
+//Models
+#include <Core/Models/main_table/m_main_table.h> // Models main table
+
+
 
 namespace Ui {
 class MainWindow;
@@ -19,6 +28,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    m_main_table *m_main_table_model;
 
 private:
     Ui::MainWindow *ui;

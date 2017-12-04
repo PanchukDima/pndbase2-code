@@ -8,7 +8,7 @@ class m_main_table : public QSqlTableModel
 {
     Q_OBJECT
 public:
-    explicit m_main_table(QObject *parent = nullptr);
+    explicit m_main_table(QObject *parent = 0);
 
 signals:
 

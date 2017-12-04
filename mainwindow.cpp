@@ -28,6 +28,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::settings_tables()
 {
+m_main_table_model = new m_main_table;
+m_main_table_model->setTable("");
+
 
 }
 void MainWindow::load_setting_find()
@@ -38,9 +41,10 @@ void MainWindow::load_setting_find()
 }
 void MainWindow::find_patients()
 {
+
     switch (ui->comboBox_search_param->currentData().toInt()) {
     case 0:
-
+        m_main_table_model->setFilter("fio ILIKE '%");
         break;
     case 1:
 
