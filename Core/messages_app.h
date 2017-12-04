@@ -16,6 +16,7 @@ signals:
 public slots:
     void db_connect_false();
 
+
 };
 
 #endif // MESSAGES_APP_H

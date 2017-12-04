@@ -24,6 +24,7 @@ public:
         static QString server_bd_database_auth;
         static QString app_staff;
         static QStringList app_service_area;
+        static QList<bool> app_user_rights;
         static QString local_path_settings;
         static QString local_path_certs;
         static QString local_path_app_dir;

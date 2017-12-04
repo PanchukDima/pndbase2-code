@@ -37,6 +37,8 @@ public slots:
     void find_patients();
     void settings_tables();
     void load_table_patients();
+    void init_signals();
+    void load_settings_user();
 };
 
 #endif // MAINWINDOW_H
