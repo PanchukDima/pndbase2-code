@@ -25,17 +25,14 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-S
-}
+
 void MainWindow::settings_tables()
 {
 
 }
 void MainWindow::load_setting_find()
 {
-    ui->comboBox_search_param->addItem("ФИО",S0);
+    ui->comboBox_search_param->addItem("ФИО",0);
     ui->comboBox_search_param->addItem("Дата Рождения",1);
     //ui->comboBox_search_param->addItem()
 }

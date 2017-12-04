@@ -32,7 +32,8 @@ SOURCES += \
     Core/logs_engine.cpp \
     Core/DialogSorWindow/Auth/d_auth.cpp \
     Core/messages_app.cpp \
-    Core/DialogSorWindow/Settings_app/d_settings_app.cpp
+    Core/DialogSorWindow/Settings_app/d_settings_app.cpp \
+    Core/Models/main_table/m_main_table.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     Core/logs_engine.h \
     Core/DialogSorWindow/Auth/d_auth.h \
     Core/messages_app.h \
-    Core/DialogSorWindow/Settings_app/d_settings_app.h
+    Core/DialogSorWindow/Settings_app/d_settings_app.h \
+    Core/Models/main_table/m_main_table.h
 
 FORMS += \
         mainwindow.ui \
