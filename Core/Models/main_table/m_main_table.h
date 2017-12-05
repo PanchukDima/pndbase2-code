@@ -5,6 +5,7 @@
 #include <QSqlTableModel>
 #include <QColor>
 #include <QSettings>
+#include <Core/objects_app.h>
 
 class m_main_table : public QSqlTableModel
 {

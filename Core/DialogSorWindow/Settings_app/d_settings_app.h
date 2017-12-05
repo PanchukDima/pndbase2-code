@@ -29,6 +29,7 @@ public slots:
     QColor get_color();
     void set_color();
     void load_param_color();
+    void load_settings_table_main_color();
 
 };
 
