@@ -3,13 +3,16 @@
 
 #include <QObject>
 #include <QSqlTableModel>
+#include <QColor>
+#include <QSettings>
 
 class m_main_table : public QSqlTableModel
 {
     Q_OBJECT
 public:
-    explicit m_main_table(QObject *parent = 0);
-
+    explicit m_main_table(QWidget *parent = 0);
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
+    QString load_color(QString,QString) const;
 signals:
 
 public slots:

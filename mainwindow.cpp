@@ -34,8 +34,8 @@ void MainWindow::init_signals()
 }
 void MainWindow::settings_tables()
 {
-m_main_table_model = new m_main_table;
-m_main_table_model->setTable("");
+    m_main_table_model = new m_main_table;
+    m_main_table_model->setTable("");
 }
 void MainWindow::load_settings_user()
 {

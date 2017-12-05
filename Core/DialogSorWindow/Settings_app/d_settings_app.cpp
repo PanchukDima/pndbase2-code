@@ -1,6 +1,7 @@
 #include "d_settings_app.h"
 #include "ui_d_settings_app.h"
 
+
 D_settings_app::D_settings_app(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::D_settings_app)
@@ -13,6 +14,31 @@ D_settings_app::D_settings_app(QWidget *parent) :
     connect(ui->pushButton_t_arch,SIGNAL(clicked(bool)),SLOT(get_text_arch()));
     connect(ui->pushButton_b_other,SIGNAL(clicked(bool)),SLOT(get_background_other()));
     connect(ui->pushButton_t_other,SIGNAL(clicked(bool)),SLOT(get_text_other()));
+    model = new QStandardItemModel(this);
+    model->insertColumns(0,3);
+    model->insertRows(0,3);
+    model->setData(model->index(1,0),"Архивная запись");
+    model->setData(model->index(2,0),"Остальные записи");
+    model->setData(model->index(0,1),"Фон");
+    model->setData(model->index(0,2),"Текст");
+    ui->tableView->setModel(model);
+    for(int i=1;i<=2;i++)
+    {
+        for(int y=1; y<=2;y++)
+        {
+            QPushButton *button;
+            button = new QPushButton(ui->tableView);
+            button->setStyleSheet("background-color: lightgray");
+            QString y_str;
+            QString x_str;
+            y_str.setNum(y);
+            x_str.setNum(i);
+            button->setProperty("type",x_str+";"+y_str);
+            connect(button,SIGNAL(clicked()),SLOT(set_color()));
+            ui->tableView->setIndexWidget(model->index(i,y), button);
+        }
+    }
+    load_param_color();
 
 }
 
@@ -29,6 +55,7 @@ void D_settings_app::load_settings()
     ui->lineEdit_database_main->setText(settings->value("db/database_main").toString());
     ui->lineEdit_db_auth->setText(settings->value("db/database_auth").toString());
 
+
 }
 void D_settings_app::save_settings()
 {
@@ -40,27 +67,7 @@ void D_settings_app::save_settings()
     settings->setValue("db/database_auth",ui->lineEdit_db_auth->text());
     D_settings_app::close();
 }
-void D_settings_app::get_background_arch()
-{
-    QColor color = get_color();
-    ui->pushButton_b_arch->setStyleSheet("background-color: "+color.name());
 
-}
-void D_settings_app::get_background_other()
-{
-    QColor color = get_color();
-    ui->pushButton_b_other->setStyleSheet("background-color: "+color.name());
-}
-void D_settings_app::get_text_arch()
-{
-    QColor color = get_color();
-    ui->pushButton_t_arch->setStyleSheet("background-color: "+color.name());
-}
-void D_settings_app::get_text_other()
-{
-    QColor color = get_color();
-    ui->pushButton_t_other->setStyleSheet("background-color: "+color.name());
-}
 QColor D_settings_app::get_color()
 {
     QColor color = QColorDialog::getColor(QColor::Cmyk);
@@ -70,5 +77,37 @@ QColor D_settings_app::get_color()
     else
     {
         return color;
+    }
+}
+void D_settings_app::set_color()
+{
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.local_path_settings,QSettings::IniFormat);
+    QString color = get_color().name();
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+         if (!button) return;
+         QString var = button->property("type").toString();
+         button->setStyleSheet("background-color: "+color);
+         settings->setValue("Style/main_table_color"+var,color);
+
+
+
+}
+void D_settings_app::load_param_color()
+{
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.local_path_settings,QSettings::IniFormat);
+    for(int i=1;i<=2;i++)
+    {
+        for(int y=1; y<=2;y++)
+        {
+            QString y_str;
+            QString x_str;
+            y_str.setNum(y);
+            x_str.setNum(i);
+            QPushButton * button = static_cast<QPushButton*>(ui->tableView->indexWidget(model->index(i,y)));
+            QString color = settings->value("Style/main_table_color"+x_str+";"+y_str).toString();
+            button->setStyleSheet("background-color: "+color);
+        }
     }
 }

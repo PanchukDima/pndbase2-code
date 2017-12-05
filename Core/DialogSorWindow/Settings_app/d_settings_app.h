@@ -6,6 +6,7 @@
 #include <Core/objects_app.h>
 #include <QColorDialog>
 #include <QDebug>
+#include <QStandardItemModel>
 
 namespace Ui {
 class D_settings_app;
@@ -18,6 +19,7 @@ class D_settings_app : public QDialog
 public:
     explicit D_settings_app(QWidget *parent = 0);
     ~D_settings_app();
+    QStandardItemModel * model;
 
 private:
     Ui::D_settings_app *ui;
@@ -25,10 +27,8 @@ public slots:
     void save_settings();
     void load_settings();
     QColor get_color();
-    void get_background_arch();
-    void get_background_other();
-    void get_text_arch();
-    void get_text_other();
+    void set_color();
+    void load_param_color();
 
 };
 
